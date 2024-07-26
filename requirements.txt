@@ -1,0 +1,9 @@
+joblib
+flask
+scikit-learn ## puede que las versiones que intentas ejecutar estan diferentes en el colaborate por lo que se debe instalar la misma version con un == 1.x.x
+pandas
+numpy
+seaborn
+matplotlib
+scikit_optimize
+xgboost
