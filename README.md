@@ -1,40 +1,77 @@
-# Udd Proyecto 7 - Tecnicas avanzadas para ciencia de datos y empleabilidad
+# Udd Proyecto 7 - Técnicas avanzadas para ciencia de datos y empleabilidad
 
-Este repositorio contiene toda la informacion respecto a el proyecto 7 del bootcamp de la UDD datacience.
-creador: Angel Araya Gonzalez.
+Este repositorio contiene toda la información respecto a el proyecto 7 del bootcamp de la UDD Data Science.
 
-Archivos: 
+**Creador: Angel Araya Gonzalez.**
 
-.venv : Entorno virtual que contiene las librerias necesarias y utilizadas para generar el modelo
+## Descripción
 
-requierements.txt : Contiene los nombres de las librerias a instalar en el entorno virtual
+Este proyecto se creó en base al sigueinte dataset de kaggle:
 
-EDA Y modelo.ipynb : contiene el analisis, liempieza y generacion de los modelos de machine learning para el Api
+*https://www.kaggle.com/datasets/lava18/google-play-store-apps*
 
-main.py : Es el archivo que genera el Api, entrega los datos ingresados y llama a la predeccion del modelo para muestra los datos deseados
+Este dataset contiene información de Apps de la Google Store del año 2018, esto incluye:
 
-model.py: Es el archivo que se encarga de generar la prediccion de los datos entregados por main.py, y devolver la prediccion al mismo, este hace el encoding y escala valores para ingresar los datos al modelo
+- Nombres
+- Categorías
+- Calificaciones o Rating
+- Cantidad de Reseñas o Reviews
+- Tamaños en Mb, Kb y b
+- Cantidad de Descargas o Instalaciones
+- Si es gratuita o de pago
+- Precios
+- Tipo de contenido
+- Últimas actualizaciones
+- Versiones de las apps
+- Versiones del sistema android
 
-acc.pkl: Este archivo contiene el valor de la precision del model.
+La idea de usar esta información de las apps es identificar que aplicaciones o qué rasgos de estas son mejores que otros, con el fin crear apps con esos rasgos y generar que sean competitivas en el mercado (Por supuesto sería deseable analizar información mas actualizada, pero es genial comenzar por algo).
+Pero no es lo unico que se puede hacer con esta información, con la misma se planea buscar relaciones entre las variables para entrenar un modelo de machine learning que logre clasificar las apps según sus datos. Esta Clasificación en si, seria su valoración/calificación de 1 a 5 puntos.
 
-modelo.pkl: Este archivo contiene el modelo entrenado.
+Por lo que la siguiente información descrita tiene el objetivo de enseñar a usar el modelo empleado como tambien ver el análisis correspondiente.
 
-escalador.pkl: Este archivo contiene el escalador entrenado para los datos del modelo
+## Archivos: 
 
-encoder.pkl: Este archivo contiene los codificadores de las variables categoricas del df, este se utiliza para tranformar los valores str a numeros y luego ser escalados.
+- Análisis:
 
-## Pasos
+    - Presentación : Es una breve presentación que explica el análisis realizado junto con los objetivos del proyecto.
+    - EDA&MODEL.ipynb : Este archivo jupiter, contiene el análisis del dataset de google y también el desarrollo del modelo creado.
+    - requirementsforeda.txt: Contiene las librerías utilizadas para realizar el análisis y el modelo.
 
-1. Crear un entorno virtual (virtualenv)
-2. Instalar las dependencias `pip install -r requirements.txt`
-3. Ejecutar el servicio `python main.py`
+- Modelo:
 
-## ¿Cómo probar el servicio?
+    - modelo.pkl : Es el modelo de machine learning creado para la Api
+    - encoder.pkl: Contiene la información del las variables categoricas codificadas para el modelo.
+    - escalador.pkl: Contiene la informacion del escalador de los datos númericos del modelo
+    - acc.pkl: Contiene la información de la exactitud del modelo creado.
 
-Una vez realizados los pasos anteriores puede probar
-el servicio a traves del navegador o cualquier cliente
-rest como postman.
+- Api Web:
 
-- Postman: debes realizar un post a http://127.0.0.1:5000/predict 
-           enviando como body un JSON con la información que requiere 
-           el modelo.
+    - main.py: Contiene el programa principal del Api, en él se llama al modelo y se ingresan los datos para tener el resultado.
+    - model.py: Contiene el programa que transforma los datos ingresados para poder ser procesados por el modelo y devuelve los resultados de las predicciones.
+    - requirements.txt:  Contiene las librerías necesarias para tanto main.py y model.py puedan ser ejecutadas por el servicio web.
+    - Procfile: Indica al servicio Web cuál es el archivo principal, de esta manera se ejecuta el servicio.
+    - runtime.txt: Indica la versión de python que debe instalar el servicio web para lograr ejecutar el modelo.
+    - .slugignore: Indica los tipos de archivos innecesarios para ejecutar el Api, de esta manera el servicio web optimiza el espacio.
+
+## Como usar el Api del servicio Web.
+
+1. Se debe tener intalado o a su disponibilidad un cliente HTTP de línea de commandos como puede ser HTTPie.
+2. Luego en la sección del URL debe ingresar el siguiente link *"https://califiacionapp-8a45adf76c94.herokuapp.com/home_page"* con el método "GET" para revisar si funciona correctamente el Api.
+3. Una vez comprobado el funcionamiento, en el link *"https://califiacionapp-8a45adf76c94.herokuapp.com/predict"* con el método "POST" debe ingresar los valores de las variables necesarias para que el modelo devuelva la prediccion de los datos.
+
+    - Los datos deben tener el sigueinte formato:
+
+        {"Category": "FAMILY",
+        "Reviews": 92010,
+        "Installs": 1000000,
+        "Type": "Free",
+        "Price_usd": 0.0,
+        "Content Rating": "Everyone",
+        "Size_Mb": 5.9,
+        "Updated Mes": 9,
+        "Updated Año": 2018}
+
+    Puedes usar estos mismos datos si lo prefieres. Debes considerar que si cambias los valores deben ser del mismo tipo de dato que los del ejemplo.
+
+4. Con ello el Api devolvera la calificación entregada por el modelo junto con la exactitud del mismo.
