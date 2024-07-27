@@ -2,10 +2,9 @@ import joblib #Se importa para poder traer los modelos y demas archivos al codig
 import pandas as pd
 
 model = joblib.load("modelo.pkl") # el nombre del archivo que contiene el modelo
-encoders = joblib.load("encoder.pkl") #el nombre del archivo que tiene los encoders
 scaler = joblib.load("escalador.pkl") #el nombre del archivo que tiene el escalador
 acc = joblib.load("acc.pkl") # y la precision del modelo segun sus pruebas
-
+encoders = joblib.load("encoder.pkl") #el nombre del archivo que tiene los encoders
 #Funcion para tranformar las columnas categoricas a numericas con sus respectivos encoders
 def transform_column(column_name, values):
     encoder = encoders[column_name]
