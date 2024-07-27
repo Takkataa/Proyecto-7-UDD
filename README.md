@@ -60,7 +60,7 @@ Por lo que la siguiente información descrita tiene el objetivo de enseñar a us
 2. Luego en la sección del URL debe ingresar el siguiente link *"https://califiacionapp-8a45adf76c94.herokuapp.com/home_page"* con el método "GET" para revisar si funciona correctamente el Api.
 3. Una vez comprobado el funcionamiento, en el link *"https://califiacionapp-8a45adf76c94.herokuapp.com/predict"* con el método "POST" debe ingresar los valores de las variables necesarias para que el modelo devuelva la prediccion de los datos.
 
-    - Los datos deben tener el sigueinte formato:
+    - Los datos deben tener el siguiente formato:
 
         {"Category": "FAMILY",
         "Reviews": 92010,
